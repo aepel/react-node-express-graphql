@@ -1,0 +1,83 @@
+{
+  "name": "front",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.15",
+    "@mui/styled-engine-sc": "^5.10.6",
+    "@swc/helpers": "^0.4.13",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "boilerplate-readme-template": "^1.0.1",
+    "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/builder-webpack5": "^6.5.13",
+    "@storybook/manager-webpack5": "^6.5.13",
+    "@storybook/node-logger": "^6.5.13",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.13",
+    "@storybook/testing-library": "0.0.13",
+    "@testing-library/dom": "^8.19.0",
+    "babel-plugin-named-exports-order": "0.0.2",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-lodash": "^7.4.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-security": "^1.5.0",
+    "eslint-plugin-small-import": "^1.0.0",
+    "eslint-plugin-storybook": "^0.6.7",
+    "jest-environment-jsdom": "^29.3.1",
+    "parcel": "^2.8.0",
+    "prettier": "^2.7.1",
+    "react-test-renderer": "^18.2.0",
+    "yarn-audit-fix": "^9.3.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "Front end in react for doing CRUD operations in a library",
+  "main": "index.js",
+  "author": "Ariel Epelman",
+  "license": "MIT"
+}
