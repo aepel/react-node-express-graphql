@@ -3,11 +3,19 @@ const { graphqlHTTP } = require('express-graphql')
 const app = express()
 const mongoose = require('mongoose')
 const schema = require('./graphql_schema/book')
+const cors = require('cors')
+
 app.get('/', (req, res) => {
   res.end("Epel's store backend is running on 3000 port...")
 })
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
+app.use(cors())
 app.use(
-  '/books',
+  '/graphql',
   graphqlHTTP({
     schema,
     graphiql: true,

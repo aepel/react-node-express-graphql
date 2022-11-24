@@ -14,13 +14,15 @@ const BookSchema = new graphql.GraphQLObjectType({
   },
 })
 const query = new graphql.GraphQLObjectType({
-  name: 'bookQuery',
+  name: 'getBooks',
   fields: {
-    vehicle: {
+    book: {
       type: new graphql.GraphQLList(BookSchema),
       args: {
         _id: { type: graphql.GraphQLString },
         title: { type: graphql.GraphQLString },
+        author: { type: graphql.GraphQLString },
+        isbn: { type: graphql.GraphQLString },
       },
       resolve: (_, { _id, title, isbn, author }) => {
         let where
@@ -35,7 +37,7 @@ const query = new graphql.GraphQLObjectType({
         } else {
           where = {}
         }
-        return vehicle.find(where)
+        return book.find(where)
       },
     },
     getByCapacity: {
@@ -50,7 +52,7 @@ const query = new graphql.GraphQLObjectType({
         } else {
           where = {}
         }
-        return vehicle.find(where)
+        return book.find(where)
       },
     },
   },
