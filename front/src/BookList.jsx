@@ -10,13 +10,10 @@ import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 
 export default function BookList() {
-  const {
-    data: { book: books },
-    loading,
-    error,
-  } = useQuery(gql`
+  const { data, loading, error } = useQuery(gql`
     {
       book {
+        _id
         title
         year
         publisher
@@ -25,13 +22,14 @@ export default function BookList() {
       }
     }
   `)
+  const { book: books } = data || { book: null }
   console.log('🚀 ~ file: BookList.jsx ~ line 18 ~ BookList ~ books', books)
 
   if (error) console.log('🚀 ~ file: BookList.jsx ~ line 30 ~ BookList ~ error', error)
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {books &&
-        books.map(book => (
+        books?.map(book => (
           <ListItem key={book._id}>
             <ListItemAvatar>
               <Avatar>
