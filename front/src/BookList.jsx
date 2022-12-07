@@ -1,14 +1,57 @@
 import * as React from 'react'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import ImageIcon from '@mui/icons-material/Image'
 import { gql } from 'apollo-boost'
+import { DataGrid } from '@mui/x-data-grid'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { Box } from '@mui/material'
 
-import { useQuery } from '@apollo/react-hooks'
-
+const columns = [
+  { field: '_id', headerName: 'ID', width: 90 },
+  {
+    field: 'author',
+    headerName: 'Author',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'title',
+    headerName: 'Title',
+    width: 110,
+    editable: true,
+  },
+  {
+    field: 'publisher',
+    headerName: 'Publisher',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'year',
+    headerName: 'Year Published',
+    type: 'number',
+    width: 110,
+    editable: true,
+  },
+  {
+    field: 'isbn',
+    headerName: 'ISBN',
+    type: 'number',
+    width: 110,
+    editable: true,
+  },
+]
+// Define mutation
+const UPDATE_BOOKS = gql`
+  # Increments a back-end counter and gets its resulting value
+  mutation Update($_id: String!, $author: String!, $publisher: String!, $year: Int!, $isbn: String!, $title: String!) {
+    update(_id: $_id, author: $author, publisher: $publisher, year: $year, isbn: $isbn, title: $title) {
+      _id
+      title
+      isbn
+      author
+      year
+    }
+  }
+`
 export default function BookList() {
   const { data, loading, error } = useQuery(gql`
     {
@@ -23,23 +66,29 @@ export default function BookList() {
     }
   `)
   const { book: books } = data || { book: null }
-  console.log('🚀 ~ file: BookList.jsx ~ line 18 ~ BookList ~ books', books)
+  const [onUpdateBooks] = useMutation(UPDATE_BOOKS)
+
+  const onRowProcessUpdate = (newRow, oldRow) => {
+    onUpdateBooks({ variables: { ...newRow } })
+  }
 
   if (error) console.log('🚀 ~ file: BookList.jsx ~ line 30 ~ BookList ~ error', error)
-  return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {books &&
-        books?.map(book => (
-          <ListItem key={book._id}>
-            <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Title" secondary={book.title} />
-            <ListItemText primary="Author" secondary={book.author} />
-          </ListItem>
-        ))}
-    </List>
-  )
+  if (books?.length)
+    return (
+      <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={books}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+          processRowUpdate={onRowProcessUpdate}
+          onProcessRowUpdateError={model => console.log(model)}
+          experimentalFeatures={{ newEditingApi: true }}
+          getRowId={row => row._id}
+        />
+      </Box>
+    )
+  else return <div>Loading.....</div>
 }

@@ -10,7 +10,7 @@ export default function Skeleton({ children }) {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Card style={{ maxWidht: '100%', minWidth: '25%', margin: '10px', padding: '10' }}>
+        <Card style={{ maxWidht: '100%', minWidth: '50%', margin: '10px', padding: '10' }}>
           <CardContent>{children}</CardContent>
         </Card>
       </header>

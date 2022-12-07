@@ -8,7 +8,7 @@ import BookList from './BookList'
 const cache = new InMemoryCache()
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:3100/graphql',
   cache,
   fetchOptions: {
     mode: 'no-cors',

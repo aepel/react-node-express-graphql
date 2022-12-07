@@ -21,8 +21,8 @@ app.use(
     graphiql: true,
   })
 )
-app.listen('3000', () => {
-  console.log('Server is starting on 3000 port...')
+app.listen('3100', () => {
+  console.log('Server is starting on 3100 port...')
   mongoose.connect(`mongodb://127.0.0.1/bookdb`)
   mongoose.connection.on('error', err => console.error('FAILED to connect to mongodb instance.', err))
   mongoose.connection.once('open', () => console.log('Connected to mongodb instance.'))

@@ -25,6 +25,7 @@ const query = new graphql.GraphQLObjectType({
         isbn: { type: graphql.GraphQLString },
       },
       resolve: (_, { _id, title, isbn, author }) => {
+        console.log(_)
         let where
         if (_id) {
           where = { _id }
@@ -82,6 +83,21 @@ const mutation = new graphql.GraphQLObjectType({
       },
       resolve: (_, { _id }) => {
         return book.findOneAndRemove(_id)
+      },
+    },
+    update: {
+      type: BookSchema,
+      args: {
+        _id: { type: graphql.GraphQLString },
+        title: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
+        year: { type: graphql.GraphQLInt },
+        publisher: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
+        author: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
+        isbn: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
+        year: { type: new graphql.GraphQLNonNull(graphql.GraphQLInt) },
+      },
+      resolve: (_, { _id, title, year, author, publisher, isbn }) => {
+        return book.findByIdAndUpdate(_id, { title, year, author, publisher, isbn })
       },
     },
   },
